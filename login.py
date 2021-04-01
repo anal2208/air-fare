@@ -45,7 +45,7 @@ def main():
             result = login_user(username,password)
             if result:
                 st.success("Login In as {}".format(username))
-                subprocess.Popen(["https://fairapp1.herokuapp.com/st.py"])
+               subprocess.Popen(["streamlit", "run", "st.py"])
 
             else:
                 st.warning("Incorrect Password")       
