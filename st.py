@@ -9,7 +9,7 @@ Created on Wed Mar 31 22:29:39 2021
 import streamlit as st
 import pickle
 import datetime
-
+import xlrd
 import pandas as pd
 #import numpy as np
 #from math import sqrt
