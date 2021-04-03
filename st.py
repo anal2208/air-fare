@@ -89,9 +89,9 @@ df_test = pd.DataFrame(val, columns =col)
 predicted_fare = model.predict(df_test)
 
 if src == desti:
-    st.header("Predcited Fare is: 0")
+    st.header("Fare is: 0")
 else:
-    st.header("Predcited Fare is: " + str(predicted_fare[0]))
+    st.header("Fare is: " + str(predicted_fare[0]))
     price = int(df_Price.loc[(df_Price['To'] == src) & (df_Price['From '] == desti)]['Per seat cost'])
     if predicted_fare[0] >= price:
         st.write("Profit per seat: ", predicted_fare[0]-price)
