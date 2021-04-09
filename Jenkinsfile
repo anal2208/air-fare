@@ -4,20 +4,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                
-                bat 'pip install -r requirements.txt'
-                echo 'Build Done'
-                
+                echo 'Building..'
+                sh 'pip install opencv-python'
+                sh 'pip install streamlit'
+                echo 'Building done!'
             }
         }
-       
-        
-                stage('Run'){
-                     steps{
-                        bat 'streamlit run st.py'
-                        echo 'Success'
+        stage('Test') {
+            steps {
+                echo 'Testing....'
+                sh 'pip install opencv-python'
+                sh 'pip install streamlit'
+                sh 'pip list'
+                sh 'streamlit run human_color_labeling.py'
+                echo 'Testing done!'
             }
-                }
-
+        }
     }
 }
