@@ -56,7 +56,7 @@ model = pickle.load(open('xgb_model.sav', 'rb'))
 
 
 #GUI===========================================================================
-st.title('Airfare Prediction')
+st.title('Airfare PPrediction')
 
 # airline = st.selectbox('Select airline', list(dict_airline.keys()), index = list(dict_airline.keys()).index('Jet Airways'))
 col1, col2 = st.beta_columns(2)
