@@ -9,7 +9,7 @@ Created on Wed Mar 31 22:29:39 2021
 import streamlit as st
 import pickle
 import datetime
-import xlrd
+
 import pandas as pd
 #import numpy as np
 #from math import sqrt
@@ -71,11 +71,40 @@ month = int(full_date.strftime("%m"))
 # arr_min = st.slider('Arrival Minute', min_value=0, max_value=59, value=0)
 # dep_hour = st.slider('Departure Hour', min_value=0, max_value=23, value=10)
 # dep_min = st.slider('Departure Minute', min_value=0, max_value=59, value=0)
-rou1 = st.selectbox('Route 1', list(routes.keys()))
-rou2 = st.selectbox('Route 2', list(routes.keys()))
+# rou1 = st.selectbox('Route 1', list(routes.keys()))
+# rou2 = st.selectbox('Route 2', list(routes.keys()))
 # rou3 = st.selectbox('Route 3', list(routes.keys()), index = list(routes.keys()).index('None'))
 # rou4 = st.selectbox('Route 4', list(routes.keys()), index = list(routes.keys()).index('None'))
 # rou5 = st.selectbox('Route 5', list(routes.keys()), index = list(routes.keys()).index('None'))
+
+
+#####
+if dict_src[src] == 0:
+    r1 = 4
+elif dict_src[src] == 1:
+    r1 = 9
+elif dict_src[src] == 2:
+    r1 = 15
+elif dict_src[src] == 3:
+    r1 = 25
+elif dict_src[src] == 4:
+    r1 = 18
+
+if dict_desti[desti] == 0:
+    r2 = 4
+elif dict_desti[desti] == 1:
+    r2 = 25
+elif dict_desti[desti] == 2:
+    r2 = 15
+elif dict_desti[desti] == 3:
+    r2 = 29
+elif dict_desti[desti] == 4:
+    r2 = 25
+#####
+
+
+
+
 
 
 col = ['Airline', 'Source', 'Destination', 'Additional_Info', 'Date', 'Month',
@@ -83,15 +112,15 @@ col = ['Airline', 'Source', 'Destination', 'Additional_Info', 'Date', 'Month',
        'Route_2', 'Route_3', 'Route_4', 'Route_5']
 
 val = [[4, dict_src[src], dict_desti[desti], 8, date, month, 
-        12, 0, 10, 0, routes[rou1], routes[rou2], 6, 6, 6]]
+        12, 0, 10, 0, r1, r2, 6, 6, 6]]
 
 df_test = pd.DataFrame(val, columns =col)
 predicted_fare = model.predict(df_test)
 
 if src == desti:
-    st.header("Fare is: 0")
+    st.header("Predcited Fare is: 0")
 else:
-    st.header("Fare is: " + str(predicted_fare[0]))
+    st.header("Predcited Fare is: " + str(predicted_fare[0]))
     price = int(df_Price.loc[(df_Price['To'] == src) & (df_Price['From '] == desti)]['Per seat cost'])
     if predicted_fare[0] >= price:
         st.write("Profit per seat: ", predicted_fare[0]-price)
